@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81be9671a66bf8345af9d6a24c563925, type: 3}
+  m_Name: LocationDatabase
+  m_EditorClassIdentifier: 
+  locations:
+  - locationName: Main Gate
+    nodeA: A
+    nodeB: A
+  - locationName: Market Gate
+    nodeA: F
+    nodeB: F
+  - locationName: H1
+    nodeA: J
+    nodeB: K
+  - locationName: H2
+    nodeA: J
+    nodeB: K
+  - locationName: H3
+    nodeA: J
+    nodeB: K
+  - locationName: H4
+    nodeA: J
+    nodeB: K
+  - locationName: H5
+    nodeA: J
+    nodeB: K
+  - locationName: H6
+    nodeA: K
+    nodeB: L
+  - locationName: H7
+    nodeA: K
+    nodeB: L
+  - locationName: H8
+    nodeA: K
+    nodeB: I
+  - locationName: H9
+    nodeA: K
+    nodeB: L
+  - locationName: H10
+    nodeA: C
+    nodeB: D
+  - locationName: H11
+    nodeA: K
+    nodeB: I
+  - locationName: H12
+    nodeA: L
+    nodeB: L
+  - locationName: H13
+    nodeA: L
+    nodeB: L
+  - locationName: H14
+    nodeA: L
+    nodeB: L
+  - locationName: Powai Lake
+    nodeA: K
+    nodeB: B
+  - locationName: KV Ground
+    nodeA: D
+    nodeB: E
+  - locationName: NCC Backlawns
+    nodeA: I
+    nodeB: J
+  - locationName: Central Library
+    nodeA: J
+    nodeB: J
+  - locationName: KReSIT Building
+    nodeA: C
+    nodeB: I
+  - locationName: Gulmohar
+    nodeA: C
+    nodeB: I
+  - locationName: Plant Nursery
+    nodeA: C
+    nodeB: I
+  - locationName: GG Lecture Hall
+    nodeA: D
+    nodeB: H
+  - locationName: SAC
+    nodeA: J
+    nodeB: K
+  - locationName: State Bank
+    nodeA: J
+    nodeB: K
