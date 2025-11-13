@@ -719,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e9a8394bd8cfc4d856db337fb43159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storage: {fileID: 11400000, guid: c1d92916918173f4381313771efc0ef4, type: 2}
   dropdown: {fileID: 1585109107}
 --- !u!114 &364563793
 MonoBehaviour:
@@ -816,7 +817,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1354551745}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.81333345
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
