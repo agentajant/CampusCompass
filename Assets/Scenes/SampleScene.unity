@@ -339,6 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   session: {fileID: 1663462781}
   find: {fileID: 573624818}
+  change: {fileID: 1415737386}
 --- !u!1 &573624817
 GameObject:
   m_ObjectHideFlags: 0
