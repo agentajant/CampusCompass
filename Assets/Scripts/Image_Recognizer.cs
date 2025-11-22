@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.XR.ARCore;
 using UnityEngine.XR.ARFoundation;
 
 public class Image_Recognizer : MonoBehaviour
 {
     private ARTrackedImageManager arTrackedImageManager;
+    public ARCameraManager cameraManager;
     public ARSession session;
     public PathFinder find;
     public scene_changing_to_Selector change;
-    private string final_node = null;
+    private bool first_node = true;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,7 +24,6 @@ public class Image_Recognizer : MonoBehaviour
     {
         if (arTrackedImageManager.trackables.count > 1)
         {
-            // Debug.Log("More than one image detected");
             session.Reset();
         }
     }
@@ -37,43 +39,66 @@ public class Image_Recognizer : MonoBehaviour
     {
         foreach (ARTrackedImage trackedImage in args.added)
         {
-            // if (final_node != null && trackedImage.referenceImage.name[0] == final_node[0])
-            // {
-            //     Debug.Log("You have reached your destination: ");
-            //     change.OnClick();
-            // }
-
-            if (trackedImage.referenceImage.name[0] == PlayerPrefs.GetString("node1")[0])
+            // Single Node System
+            if (PlayerPrefs.GetString("node1") == PlayerPrefs.GetString("node2"))
             {
-                final_node = PlayerPrefs.GetString("node2");
-                Debug.Log("Last Node " + final_node);
+                if (trackedImage.referenceImage.name[0] == PlayerPrefs.GetString("node1")[0])
+                {
+                    arTrackedImageManager.trackedImagesChanged -= OnImageChanged;
+                    cameraManager.enabled = false;
+                    arTrackedImageManager.enabled = false;
+                    change.OnClick();
+                }
+                else
+                {
+                    // Debug.Log("Next Node " + find.finder(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node1")[0]));
+                    PlayerPrefs.SetFloat("Angle", find.Angle(trackedImage.referenceImage.name[0], find.finder(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node1")[0])[0]));
+                }
             }
-
-            else if(trackedImage.referenceImage.name[0] == PlayerPrefs.GetString("node2")[0])
-            {
-                final_node = PlayerPrefs.GetString("node1");
-                Debug.Log("Last Node " + final_node);
-            }
-
-            else if (find.distance(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node1")[0]) <= find.distance(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node2")[0]))
-            {
-                Debug.Log(PlayerPrefs.GetString("node1")[0]);
-                Debug.Log("Next Node " + find.finder(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node1")[0]));
-            }
+            // Multi Node System
             else
             {
-                Debug.Log(PlayerPrefs.GetString("node2")[0]);
-                Debug.Log("Next Node " + find.finder(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node2")[0]));
-            }
-            
+                if(first_node == true)
+                {
+                    if (find.distance(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node1")[0]) > find.distance(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("node2")[0]))
+                    {
+                        PlayerPrefs.SetString("FinalNode", PlayerPrefs.GetString("node1"));
+                        PlayerPrefs.SetString("SemiNode", PlayerPrefs.GetString("node2"));
+                        
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetString("FinalNode", PlayerPrefs.GetString("node2"));
+                        PlayerPrefs.SetString("SemiNode", PlayerPrefs.GetString("node1"));
+                    }
+                    // Debug.Log("Final Node " + PlayerPrefs.GetString("FinalNode"));
+                    first_node = false;
+                }
+                else
+                {
+                    if (trackedImage.referenceImage.name[0] == PlayerPrefs.GetString("FinalNode")[0])
+                    {
+                        arTrackedImageManager.trackedImagesChanged -= OnImageChanged;
+                        cameraManager.enabled = false;
+                        arTrackedImageManager.enabled = false;
+                        change.OnClick();
+                    }
+                    else if(trackedImage.referenceImage.name[0] == PlayerPrefs.GetString("SemiNode")[0])
+                    {
+                        // Debug.Log("Final Node " + PlayerPrefs.GetString("FinalNode")[0]);
+                        PlayerPrefs.SetFloat("Angle", find.Angle(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("FinalNode")[0]));
+                    }
+                    else
+                    { 
+                        // Debug.Log("Next Node " + find.finder(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("SemiNode")[0]));
+                        PlayerPrefs.SetFloat("Angle", find.Angle(trackedImage.referenceImage.name[0], find.finder(trackedImage.referenceImage.name[0], PlayerPrefs.GetString("SemiNode")[0])[0]));
+                    }
+                }
+            }          
         }
-        // foreach (ARTrackedImage trackedImage in args.removed)
-        // {
-        //     Debug.Log("Removed Image: " + trackedImage.referenceImage.name);
-        // }
     }
 
-    public void remove_objs()
+    public void Remove_objs()
     {
         session.Reset();
     }
