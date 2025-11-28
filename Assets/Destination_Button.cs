@@ -14,5 +14,6 @@ public class Destination_Button : MonoBehaviour
         Debug.Log(dropdown.value);
         PlayerPrefs.SetString("node1", storage.locations[dropdown.value].nodeA);
         PlayerPrefs.SetString("node2", storage.locations[dropdown.value].nodeB);
+        Debug.Log("Destination Set To: " + PlayerPrefs.GetString("node1") + " and " + PlayerPrefs.GetString("node2"));
     }
 }

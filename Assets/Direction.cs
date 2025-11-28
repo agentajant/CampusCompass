@@ -17,6 +17,6 @@ public class Direction : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, y - 0.1f, transform.position.z);
         transform.localRotation = Quaternion.Euler(-90, 0, PlayerPrefs.GetFloat("Angle") - 90);
-        Debug.Log("Angle Set To: " + PlayerPrefs.GetFloat("Angle"));
+        // Debug.Log("Angle Set To: " + PlayerPrefs.GetFloat("Angle"));
     }
 }

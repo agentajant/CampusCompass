@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.XR.ARCore;
 using UnityEngine.XR.ARFoundation;
+using TMPro;
 
 public class Image_Recognizer : MonoBehaviour
 {
@@ -15,6 +12,7 @@ public class Image_Recognizer : MonoBehaviour
     public PathFinder find;
     public scene_changing_to_Selector change;
     private bool first_node = true;
+    public TMP_Text debug_text;
     // Start is called before the first frame update
     void Awake()
     {
@@ -39,6 +37,8 @@ public class Image_Recognizer : MonoBehaviour
     {
         foreach (ARTrackedImage trackedImage in args.added)
         {
+            debug_text.text = trackedImage.referenceImage.name;
+            Debug.Log("Detected Image " + PlayerPrefs.GetString("node1"));
             // Single Node System
             if (PlayerPrefs.GetString("node1") == PlayerPrefs.GetString("node2"))
             {
