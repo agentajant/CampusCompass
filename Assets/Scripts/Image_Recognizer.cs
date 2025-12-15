@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using TMPro;
+using UnityEngine.XR.ARSubsystems;
 
 public class Image_Recognizer : MonoBehaviour
 {
-    private ARTrackedImageManager arTrackedImageManager;
+    public XRReferenceImageLibrary lib;
+    public ARTrackedImageManager arTrackedImageManager;
     public ARCameraManager cameraManager;
     public ARSession session;
     public PathFinder find;
     public scene_changing_to_Selector change;
     private bool first_node = true;
-    public TMP_Text debug_text;
+
+    public TMP_Text debug_text, debug_text2, debug_text3, debug_text4;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        arTrackedImageManager = GetComponent<ARTrackedImageManager>();
+        arTrackedImageManager.referenceLibrary = lib;
+        arTrackedImageManager.enabled = true;
     }
     void Update()
     {
@@ -24,6 +28,9 @@ public class Image_Recognizer : MonoBehaviour
         {
             session.Reset();
         }
+
+        debug_text3.text = "LibraryCount: " + arTrackedImageManager.referenceLibrary.count;
+        debug_text4.text = arTrackedImageManager.trackables.count.ToString();
     }
     void OnEnable()
     {
@@ -37,7 +44,10 @@ public class Image_Recognizer : MonoBehaviour
     {
         foreach (ARTrackedImage trackedImage in args.added)
         {
-            debug_text.text = trackedImage.referenceImage.name;
+            debug_text.text = "Detected: " + trackedImage.referenceImage.name;
+            // debug_text2.text = "State: " + trackedImage.trackingState.ToString();
+            // debug_text3.text = "LibraryCount: " + arTrackedImageManager.referenceLibrary.count;
+
             Debug.Log("Detected Image " + PlayerPrefs.GetString("node1"));
             // Single Node System
             if (PlayerPrefs.GetString("node1") == PlayerPrefs.GetString("node2"))

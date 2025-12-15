@@ -24,7 +24,7 @@ MonoBehaviour:
       m_GuidLow: 6833243516227757608
       m_GuidHigh: 18431975835850082937
     m_Size: {x: 0.14, y: 0.21406728}
-    m_SpecifySize: 1
+    m_SpecifySize: 0
     m_Name: book
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
@@ -34,6 +34,6 @@ MonoBehaviour:
       m_GuidLow: 12845651690183004356
       m_GuidHigh: 105765776659534250
     m_Size: {x: 0.14, y: 0.21512605}
-    m_SpecifySize: 1
+    m_SpecifySize: 0
     m_Name: Object
     m_Texture: {fileID: 0}

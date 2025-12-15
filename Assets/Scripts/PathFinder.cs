@@ -32,7 +32,7 @@ public class PathFinder : MonoBehaviour
             { "H", new Dictionary<string, float>{{"D", 180}, {"G", 90}, {"I", 270}} },
             { "I", new Dictionary<string, float>{{"C", 180}, {"H", 90}, {"J", 0}, {"K", 315}} },
             { "J", new Dictionary<string, float>{{"G", 90}, {"I", 180}, {"K", 0}} },
-            { "K", new Dictionary<string, float>{{"B", 225}, {"J", 0}, {"L", 135}, {"I", 315}} },
+            { "K", new Dictionary<string, float>{{"B", 225}, {"J", 0}, {"L", 315}, {"I", 135}} },
             { "L", new Dictionary<string, float>{{"K", 135}} }
         };
     
